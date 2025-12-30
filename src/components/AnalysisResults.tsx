@@ -60,90 +60,111 @@ export default function AnalysisResults({ analysis, onNewAnalysis }: AnalysisRes
   const totalYears = parseInt(calculateTotalExperience().split(' ')[0]) || 3;
 
   return (
-    <div className="bg-gray-50 pb-6">
+    <div className="bg-gradient-to-b from-gray-50 to-white pb-6">
       <div className="space-y-6">
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-          <div className="flex items-center gap-4 mb-6">
-            <div className="w-16 h-16 bg-gradient-to-br from-primary/80 to-primary rounded-full flex items-center justify-center">
-              <User className="w-8 h-8 text-white" />
+        <div className="bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-lg border border-gray-200 p-8 hover:shadow-xl transition-shadow duration-300">
+          <div className="flex items-center gap-5 mb-6">
+            <div className="relative">
+              <div className="w-20 h-20 bg-gradient-to-br from-primary via-primary/90 to-primary/80 rounded-2xl flex items-center justify-center shadow-lg ring-4 ring-primary/10">
+                <User className="w-10 h-10 text-white" />
+              </div>
+              <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-green-500 rounded-full border-4 border-white"></div>
             </div>
             <div className="flex-1">
-              <h2 className="text-xl font-bold text-gray-900">{candidateBasicDetails.candidateName}</h2>
-              <p className="text-sm text-gray-600 mt-0.5">{candidateBasicDetails.roleAppliedFor}</p>
-              <p className="text-xs text-gray-500 mt-0.5">{candidateBasicDetails.candidateLocation}</p>
+              <h2 className="text-2xl font-bold text-gray-900 mb-1">{candidateBasicDetails.candidateName}</h2>
+              <p className="text-base font-medium text-gray-700 mb-1">{candidateBasicDetails.roleAppliedFor}</p>
+              <div className="flex items-center gap-2 text-gray-500">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                <p className="text-sm">{candidateBasicDetails.candidateLocation}</p>
+              </div>
             </div>
           </div>
 
-          <div className="flex items-center justify-between mb-6 pb-6 border-b border-gray-200">
-            <div className={`px-4 py-2 rounded-full border-2 ${badge.border} ${badge.bg} ${badge.text} font-semibold text-sm`}>
+          <div className="flex items-center justify-between mb-6 pb-6 border-b-2 border-gray-100">
+            <div className={`px-5 py-2.5 rounded-xl border-2 ${badge.border} ${badge.bg} ${badge.text} font-bold text-sm shadow-md`}>
               {candidateBasicDetails.aiCandidateRecommendation.toUpperCase()}
             </div>
             <div className="flex items-center gap-2">
               {candidateBasicDetails.candidateLinkedIn && (
-                <a href={candidateBasicDetails.candidateLinkedIn} target="_blank" rel="noopener noreferrer" className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
-                  <Linkedin className="w-4 h-4 text-gray-600" />
+                <a href={candidateBasicDetails.candidateLinkedIn} target="_blank" rel="noopener noreferrer" className="p-2.5 hover:bg-primary/10 hover:text-primary rounded-xl transition-all duration-200 hover:scale-110">
+                  <Linkedin className="w-4 h-4" />
                 </a>
               )}
-              <button className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
-                <Twitter className="w-4 h-4 text-gray-600" />
+              <button className="p-2.5 hover:bg-primary/10 hover:text-primary rounded-xl transition-all duration-200 hover:scale-110">
+                <Twitter className="w-4 h-4" />
               </button>
-              <button className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
-                <Github className="w-4 h-4 text-gray-600" />
+              <button className="p-2.5 hover:bg-primary/10 hover:text-primary rounded-xl transition-all duration-200 hover:scale-110">
+                <Github className="w-4 h-4" />
               </button>
-              <button className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
-                <Globe className="w-4 h-4 text-gray-600" />
+              <button className="p-2.5 hover:bg-primary/10 hover:text-primary rounded-xl transition-all duration-200 hover:scale-110">
+                <Globe className="w-4 h-4" />
               </button>
             </div>
           </div>
 
           <div className="grid grid-cols-2 gap-4">
-            <div>
-              <p className="text-xs text-gray-500 mb-1">Total Experience</p>
-              <p className="text-sm font-bold text-gray-900">{calculateTotalExperience()}</p>
+            <div className="bg-gradient-to-br from-gray-50 to-white p-4 rounded-xl border border-gray-200 hover:shadow-md transition-shadow duration-200">
+              <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Total Experience</p>
+              <p className="text-base font-bold text-gray-900">{calculateTotalExperience()}</p>
             </div>
-            <div>
-              <p className="text-xs text-gray-500 mb-1">Current CTC</p>
-              <p className="text-sm font-bold text-gray-900">{candidateBasicDetails.currentCTC || 'N/A'}</p>
+            <div className="bg-gradient-to-br from-gray-50 to-white p-4 rounded-xl border border-gray-200 hover:shadow-md transition-shadow duration-200">
+              <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Current CTC</p>
+              <p className="text-base font-bold text-gray-900">{candidateBasicDetails.currentCTC || 'N/A'}</p>
             </div>
-            <div>
-              <p className="text-xs text-gray-500 mb-1">Expected CTC</p>
-              <p className="text-sm font-bold text-gray-900">{candidateBasicDetails.expectedCTC || 'N/A'}</p>
+            <div className="bg-gradient-to-br from-gray-50 to-white p-4 rounded-xl border border-gray-200 hover:shadow-md transition-shadow duration-200">
+              <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Expected CTC</p>
+              <p className="text-base font-bold text-gray-900">{candidateBasicDetails.expectedCTC || 'N/A'}</p>
             </div>
-            <div>
-              <p className="text-xs text-gray-500 mb-1">Workplace</p>
-              <p className="text-sm font-bold text-gray-900">{candidateBasicDetails.relocation === 'Yes' ? 'Remote / Onsite' : 'Onsite'}</p>
+            <div className="bg-gradient-to-br from-gray-50 to-white p-4 rounded-xl border border-gray-200 hover:shadow-md transition-shadow duration-200">
+              <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Workplace</p>
+              <p className="text-base font-bold text-gray-900">{candidateBasicDetails.relocation === 'Yes' ? 'Remote / Onsite' : 'Onsite'}</p>
             </div>
           </div>
         </div>
 
         <div
           onClick={() => setIsDrawerOpen(true)}
-          className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl shadow-sm border-2 border-primary/20 p-6 cursor-pointer hover:shadow-lg hover:border-primary/40 transition-all"
+          className="relative bg-gradient-to-br from-primary/10 via-primary/5 to-transparent rounded-2xl shadow-lg border-2 border-primary/30 p-8 cursor-pointer hover:shadow-2xl hover:border-primary/50 hover:scale-[1.02] transition-all duration-300 group overflow-hidden"
         >
-          <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                <Sparkles className="w-5 h-5 text-white" />
+          <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-500"></div>
+          <div className="relative">
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 bg-gradient-to-br from-primary to-primary/80 rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                  <Sparkles className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold text-gray-900">AI Summary</h3>
+                  <p className="text-xs text-gray-600">Click to view detailed analysis</p>
+                </div>
               </div>
-              <h3 className="text-base font-semibold text-gray-900">AI Summary</h3>
+              <button className="px-6 py-3 bg-gradient-to-r from-primary to-primary/90 text-white text-sm font-bold rounded-xl shadow-md hover:shadow-lg hover:scale-105 active:scale-95 transition-all duration-200">
+                View Details
+              </button>
             </div>
-            <button className="px-4 py-2 bg-primary text-white text-sm font-semibold rounded-lg hover:bg-primary/90 transition-colors">
-              View Details
-            </button>
-          </div>
-          <div className="space-y-2">
-            {candidateDetailedSummary.threeBulletSummary.slice(0, 2).map((bullet, index) => (
-              <div key={index} className="flex gap-3">
-                <CheckCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                <p className="text-sm text-gray-700 leading-relaxed line-clamp-1">{bullet}</p>
-              </div>
-            ))}
-            <p className="text-sm text-primary font-medium pl-8">Click to view full analysis...</p>
+            <div className="space-y-3">
+              {candidateDetailedSummary.threeBulletSummary.slice(0, 2).map((bullet, index) => (
+                <div key={index} className="flex gap-3 bg-white/50 p-3 rounded-xl">
+                  <CheckCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                  <p className="text-sm text-gray-700 leading-relaxed line-clamp-1 font-medium">{bullet}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-          <h3 className="text-sm font-semibold text-gray-700 mb-4">Candidate Relevancy Details</h3>
+        <div className="bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-lg border border-gray-200 p-8 hover:shadow-xl transition-shadow duration-300">
+          <div className="flex items-center gap-2 mb-6">
+            <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center">
+              <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+              </svg>
+            </div>
+            <h3 className="text-lg font-bold text-gray-900">Candidate Relevancy Details</h3>
+          </div>
           <div className="flex justify-center mb-6">
             <CircularProgress
               percentage={candidateBasicDetails.candidateOverallScore}
@@ -236,8 +257,15 @@ export default function AnalysisResults({ analysis, onNewAnalysis }: AnalysisRes
           </div>
         </div>
 
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-          <h3 className="text-sm font-semibold text-gray-700 mb-4">Professional summary</h3>
+        <div className="bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-lg border border-gray-200 p-8 hover:shadow-xl transition-shadow duration-300">
+          <div className="flex items-center gap-2 mb-6">
+            <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center">
+              <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <h3 className="text-lg font-bold text-gray-900">Professional summary</h3>
+          </div>
           <div className="space-y-4">
             <div>
               <p className="text-xs text-gray-500 mb-2">Age / Job tenure</p>
@@ -369,9 +397,14 @@ export default function AnalysisResults({ analysis, onNewAnalysis }: AnalysisRes
           </div>
         )}
 
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-sm font-semibold text-gray-700">Keywords and Skills</h3>
+        <div className="bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-lg border border-gray-200 p-8 hover:shadow-xl transition-shadow duration-300">
+          <div className="flex items-center gap-2 mb-6">
+            <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center">
+              <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+              </svg>
+            </div>
+            <h3 className="text-lg font-bold text-gray-900">Keywords and Skills</h3>
           </div>
 
           <div className="mb-4">
@@ -416,10 +449,17 @@ export default function AnalysisResults({ analysis, onNewAnalysis }: AnalysisRes
           </div>
         </div>
 
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-sm font-semibold text-gray-700">Skill depth analysis</h3>
-            <span className="text-xs text-gray-500">{candidateDetailedSummary.candidateSkillDepthAnalysis.length} SKILLS</span>
+        <div className="bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-lg border border-gray-200 p-8 hover:shadow-xl transition-shadow duration-300">
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center">
+                <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
+              <h3 className="text-lg font-bold text-gray-900">Skill depth analysis</h3>
+            </div>
+            <span className="px-3 py-1.5 bg-primary/10 text-primary rounded-lg text-xs font-bold">{candidateDetailedSummary.candidateSkillDepthAnalysis.length} SKILLS</span>
           </div>
           <div className="grid grid-cols-2 gap-4">
             {candidateDetailedSummary.candidateSkillDepthAnalysis.slice(0, 6).map((skill, index) => (
@@ -439,8 +479,15 @@ export default function AnalysisResults({ analysis, onNewAnalysis }: AnalysisRes
           </div>
         </div>
 
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-          <h3 className="text-sm font-semibold text-gray-700 mb-4">Company tier analysis</h3>
+        <div className="bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-lg border border-gray-200 p-8 hover:shadow-xl transition-shadow duration-300">
+          <div className="flex items-center gap-2 mb-6">
+            <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center">
+              <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+              </svg>
+            </div>
+            <h3 className="text-lg font-bold text-gray-900">Company tier analysis</h3>
+          </div>
           {tierData.length > 0 && (
             <div className="flex justify-center">
               <PieChart data={tierData} size={200} />
@@ -450,40 +497,40 @@ export default function AnalysisResults({ analysis, onNewAnalysis }: AnalysisRes
       </div>
 
       <RightDrawer isOpen={isDrawerOpen} onClose={() => setIsDrawerOpen(false)} title="AI Summary">
-        <div className="space-y-6">
-          <div className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl p-6 border border-primary/20">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-                <Sparkles className="w-6 h-6 text-white" />
+        <div className="space-y-6 animate-fade-in-up">
+          <div className="bg-gradient-to-br from-primary/10 via-primary/5 to-transparent rounded-2xl p-8 border-2 border-primary/20 shadow-lg">
+            <div className="flex items-center gap-4 mb-4">
+              <div className="w-14 h-14 bg-gradient-to-br from-primary to-primary/80 rounded-xl flex items-center justify-center shadow-lg">
+                <Sparkles className="w-7 h-7 text-white" />
               </div>
               <div>
-                <h3 className="text-lg font-bold text-gray-900">Candidate Analysis</h3>
-                <p className="text-sm text-gray-600">AI-powered comprehensive evaluation</p>
+                <h3 className="text-2xl font-bold text-gray-900">Candidate Analysis</h3>
+                <p className="text-sm text-gray-600 mt-1">AI-powered comprehensive evaluation</p>
               </div>
             </div>
           </div>
 
           <div className="space-y-4">
-            <h4 className="text-sm font-semibold text-secondary uppercase tracking-wide">Key Insights</h4>
+            <h4 className="text-base font-bold text-secondary uppercase tracking-wide mb-4">Key Insights</h4>
             {candidateDetailedSummary.threeBulletSummary.map((bullet, index) => (
-              <div key={index} className="flex gap-3 p-4 bg-gray-50 rounded-lg border border-gray-200">
-                <CheckCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                <p className="text-sm text-gray-700 leading-relaxed">{bullet}</p>
+              <div key={index} className="flex gap-4 p-5 bg-gradient-to-r from-white to-gray-50 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-200">
+                <CheckCircle className="w-6 h-6 text-primary flex-shrink-0 mt-0.5" />
+                <p className="text-sm text-gray-700 leading-relaxed font-medium">{bullet}</p>
               </div>
             ))}
           </div>
 
-          <div className="border-t border-gray-200 pt-6">
-            <h4 className="text-sm font-semibold text-secondary uppercase tracking-wide mb-4">Recommendation</h4>
-            <div className={`p-4 rounded-lg border-2 ${
+          <div className="border-t-2 border-gray-200 pt-6">
+            <h4 className="text-base font-bold text-secondary uppercase tracking-wide mb-4">Recommendation</h4>
+            <div className={`p-6 rounded-2xl border-2 shadow-lg ${
               candidateBasicDetails.aiCandidateRecommendation === 'Strong Hire'
-                ? 'bg-green-50 border-green-500'
+                ? 'bg-gradient-to-br from-green-50 to-green-100 border-green-500'
                 : candidateBasicDetails.aiCandidateRecommendation === 'Consider'
-                ? 'bg-yellow-50 border-yellow-500'
-                : 'bg-red-50 border-red-500'
+                ? 'bg-gradient-to-br from-yellow-50 to-yellow-100 border-yellow-500'
+                : 'bg-gradient-to-br from-red-50 to-red-100 border-red-500'
             }`}>
               <div className="flex items-center justify-between">
-                <span className={`text-lg font-bold ${
+                <span className={`text-xl font-bold ${
                   candidateBasicDetails.aiCandidateRecommendation === 'Strong Hire'
                     ? 'text-green-700'
                     : candidateBasicDetails.aiCandidateRecommendation === 'Consider'
@@ -493,8 +540,8 @@ export default function AnalysisResults({ analysis, onNewAnalysis }: AnalysisRes
                   {candidateBasicDetails.aiCandidateRecommendation.toUpperCase()}
                 </span>
                 <div className="text-right">
-                  <p className="text-2xl font-bold text-gray-900">{candidateBasicDetails.candidateOverallScore}%</p>
-                  <p className="text-xs text-gray-600">Overall Score</p>
+                  <p className="text-3xl font-bold text-gray-900">{candidateBasicDetails.candidateOverallScore}%</p>
+                  <p className="text-xs text-gray-600 font-semibold uppercase tracking-wide mt-1">Overall Score</p>
                 </div>
               </div>
             </div>

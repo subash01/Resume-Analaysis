@@ -24,27 +24,27 @@ export default function RightDrawer({ isOpen, onClose, children, title }: RightD
   return (
     <>
       <div
-        className={`fixed inset-0 bg-black bg-opacity-50 transition-opacity duration-300 z-40 ${
-          isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+        className={`fixed inset-0 bg-black transition-opacity duration-500 z-40 ${
+          isOpen ? 'bg-opacity-60 backdrop-blur-sm' : 'bg-opacity-0 pointer-events-none'
         }`}
         onClick={onClose}
       />
       <div
-        className={`fixed top-0 right-0 h-full w-1/2 bg-white shadow-2xl transform transition-transform duration-300 ease-in-out z-50 ${
+        className={`fixed top-0 right-0 h-full w-1/2 bg-gradient-to-b from-white to-gray-50 shadow-2xl transform transition-all duration-500 ease-out z-50 ${
           isOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
         <div className="h-full flex flex-col">
-          <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 bg-white">
-            {title && <h2 className="text-lg font-semibold text-gray-900">{title}</h2>}
+          <div className="flex items-center justify-between px-8 py-5 border-b border-gray-200 bg-white/80 backdrop-blur-md sticky top-0 z-10">
+            {title && <h2 className="text-xl font-bold text-gray-900">{title}</h2>}
             <button
               onClick={onClose}
-              className="ml-auto p-2 hover:bg-gray-100 rounded-lg transition-colors"
+              className="ml-auto p-2.5 hover:bg-gray-100 rounded-xl transition-all duration-200 hover:scale-110 active:scale-95"
             >
               <X className="w-5 h-5 text-gray-600" />
             </button>
           </div>
-          <div className="flex-1 overflow-y-auto px-6 py-6">
+          <div className="flex-1 overflow-y-auto px-8 py-6 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
             {children}
           </div>
         </div>
