@@ -16,7 +16,7 @@ export default function CircularProgress({
   const offset = circumference - (percentage / 100) * circumference;
 
   const getColor = (percent: number) => {
-    if (percent >= 80) return '#22c55e';
+    if (percent >= 80) return '#EE3961';
     if (percent >= 60) return '#eab308';
     if (percent >= 40) return '#f97316';
     return '#ef4444';

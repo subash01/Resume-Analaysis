@@ -1,7 +1,9 @@
-import { CheckCircle, XCircle, Download, ArrowLeft, Linkedin, Twitter, Github, Globe, User } from 'lucide-react';
+import { CheckCircle, XCircle, Download, ArrowLeft, Linkedin, Twitter, Github, Globe, User, Sparkles } from 'lucide-react';
+import { useState } from 'react';
 import CircularProgress from './CircularProgress';
 import GaugeChart from './GaugeChart';
 import PieChart from './PieChart';
+import RightDrawer from './RightDrawer';
 import type { AnalysisOutput } from '../types/analysis.types';
 
 interface AnalysisResultsProps {
@@ -11,6 +13,7 @@ interface AnalysisResultsProps {
 
 export default function AnalysisResults({ analysis, onNewAnalysis }: AnalysisResultsProps) {
   const { candidateBasicDetails, candidateDetailedSummary } = analysis;
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const getRecommendationBadge = (recommendation: string) => {
     const badges = {
@@ -32,24 +35,24 @@ export default function AnalysisResults({ analysis, onNewAnalysis }: AnalysisRes
   const industryData = candidateDetailedSummary.companyTierAnalysis.map(company => ({
     label: company.companyName,
     value: company.tenureMonths,
-    color: company.tier === 'Tier 1' ? '#3b82f6' : company.tier === 'Tier 2' ? '#10b981' : '#f59e0b'
+    color: company.tier === 'Tier 1' ? '#EE3961' : company.tier === 'Tier 2' ? '#45546E' : '#f59e0b'
   }));
 
   const tierData = [
     {
       label: 'Startup',
       value: candidateDetailedSummary.companyTierAnalysis.filter(c => c.tier === 'Tier 3').length,
-      color: '#ec4899'
+      color: '#f59e0b'
     },
     {
       label: 'Mid size',
       value: candidateDetailedSummary.companyTierAnalysis.filter(c => c.tier === 'Tier 2').length,
-      color: '#f59e0b'
+      color: '#45546E'
     },
     {
       label: 'Enterprise',
       value: candidateDetailedSummary.companyTierAnalysis.filter(c => c.tier === 'Tier 1').length,
-      color: '#3b82f6'
+      color: '#EE3961'
     }
   ].filter(item => item.value > 0);
 
@@ -71,7 +74,7 @@ export default function AnalysisResults({ analysis, onNewAnalysis }: AnalysisRes
             </div>
             <button
               onClick={onNewAnalysis}
-              className="px-6 py-2 bg-green-500 text-white text-sm font-semibold rounded-lg hover:bg-green-600 transition-colors"
+              className="px-6 py-2 bg-primary text-white text-sm font-semibold rounded-lg hover:bg-primary/90 transition-colors"
             >
               New Analysis
             </button>
@@ -86,7 +89,7 @@ export default function AnalysisResults({ analysis, onNewAnalysis }: AnalysisRes
               <button onClick={onNewAnalysis} className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
                 <ArrowLeft className="w-5 h-5 text-gray-600" />
               </button>
-              <div className="w-16 h-16 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center">
+              <div className="w-16 h-16 bg-gradient-to-br from-primary/80 to-primary rounded-full flex items-center justify-center">
                 <User className="w-8 h-8 text-white" />
               </div>
               <div>
@@ -221,7 +224,7 @@ export default function AnalysisResults({ analysis, onNewAnalysis }: AnalysisRes
                       <p className="text-xs text-gray-500 mt-0.5">Weighted average across all categories</p>
                     </div>
                     <div className="text-right">
-                      <span className="text-base font-bold text-green-600">{candidateBasicDetails.candidateOverallScore}%</span>
+                      <span className="text-base font-bold text-primary">{candidateBasicDetails.candidateOverallScore}%</span>
                     </div>
                   </div>
                 </div>
@@ -251,7 +254,7 @@ export default function AnalysisResults({ analysis, onNewAnalysis }: AnalysisRes
                     <GaugeChart value={Math.min(totalYears, 10)} max={10} label="" />
                     <div>
                       <p className="text-sm font-bold text-gray-900">{calculateTotalExperience()}</p>
-                      <span className="inline-block px-2 py-0.5 bg-blue-100 text-blue-700 text-xs rounded-full mt-1">
+                      <span className="inline-block px-2 py-0.5 bg-primary/10 text-primary text-xs rounded-full mt-1">
                         Professional
                       </span>
                     </div>
@@ -336,14 +339,14 @@ export default function AnalysisResults({ analysis, onNewAnalysis }: AnalysisRes
                       </div>
                     </div>
 
-                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
+                    <div className="bg-primary/10 border border-primary/20 rounded-lg p-3">
                       <div className="flex items-start gap-2">
-                        <svg className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <svg className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
                         </svg>
                         <div className="flex-1">
-                          <p className="text-xs font-semibold text-blue-900 mb-1">Recommended Action</p>
-                          <p className="text-xs text-blue-800">
+                          <p className="text-xs font-semibold text-secondary mb-1">Recommended Action</p>
+                          <p className="text-xs text-secondary">
                             Discuss during interview to understand the context and any activities during this period such as education, personal development, or consulting work.
                           </p>
                         </div>
@@ -425,20 +428,29 @@ export default function AnalysisResults({ analysis, onNewAnalysis }: AnalysisRes
           </div>
 
           <div className="col-span-8 space-y-6">
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-              <div className="flex items-center gap-2 mb-4">
-                <div className="w-6 h-6 bg-green-100 rounded flex items-center justify-center">
-                  <CheckCircle className="w-4 h-4 text-green-600" />
+            <div
+              onClick={() => setIsDrawerOpen(true)}
+              className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl shadow-sm border-2 border-primary/20 p-6 cursor-pointer hover:shadow-lg hover:border-primary/40 transition-all"
+            >
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+                    <Sparkles className="w-5 h-5 text-white" />
+                  </div>
+                  <h3 className="text-base font-semibold text-gray-900">AI Summary</h3>
                 </div>
-                <h3 className="text-sm font-semibold text-gray-700">AI Summary</h3>
+                <button className="px-4 py-2 bg-primary text-white text-sm font-semibold rounded-lg hover:bg-primary/90 transition-colors">
+                  View Details
+                </button>
               </div>
-              <div className="space-y-3">
-                {candidateDetailedSummary.threeBulletSummary.map((bullet, index) => (
+              <div className="space-y-2">
+                {candidateDetailedSummary.threeBulletSummary.slice(0, 2).map((bullet, index) => (
                   <div key={index} className="flex gap-3">
-                    <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                    <p className="text-sm text-gray-700 leading-relaxed">{bullet}</p>
+                    <CheckCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                    <p className="text-sm text-gray-700 leading-relaxed line-clamp-1">{bullet}</p>
                   </div>
                 ))}
+                <p className="text-sm text-primary font-medium pl-8">Click to view full analysis...</p>
               </div>
             </div>
 
@@ -456,7 +468,7 @@ export default function AnalysisResults({ analysis, onNewAnalysis }: AnalysisRes
                     </div>
                     <div className="w-full bg-gray-200 rounded-full h-2">
                       <div
-                        className="h-2 rounded-full bg-gradient-to-r from-green-400 to-green-500"
+                        className="h-2 rounded-full bg-gradient-to-r from-primary/80 to-primary"
                         style={{ width: `${skill.depthScore}%` }}
                       />
                     </div>
@@ -520,6 +532,71 @@ export default function AnalysisResults({ analysis, onNewAnalysis }: AnalysisRes
           </div>
         </div>
       </div>
+
+      <RightDrawer isOpen={isDrawerOpen} onClose={() => setIsDrawerOpen(false)} title="AI Summary">
+        <div className="space-y-6">
+          <div className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl p-6 border border-primary/20">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                <Sparkles className="w-6 h-6 text-white" />
+              </div>
+              <div>
+                <h3 className="text-lg font-bold text-gray-900">Candidate Analysis</h3>
+                <p className="text-sm text-gray-600">AI-powered comprehensive evaluation</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="space-y-4">
+            <h4 className="text-sm font-semibold text-secondary uppercase tracking-wide">Key Insights</h4>
+            {candidateDetailedSummary.threeBulletSummary.map((bullet, index) => (
+              <div key={index} className="flex gap-3 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                <CheckCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                <p className="text-sm text-gray-700 leading-relaxed">{bullet}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="border-t border-gray-200 pt-6">
+            <h4 className="text-sm font-semibold text-secondary uppercase tracking-wide mb-4">Recommendation</h4>
+            <div className={`p-4 rounded-lg border-2 ${
+              candidateBasicDetails.aiCandidateRecommendation === 'Strong Hire'
+                ? 'bg-green-50 border-green-500'
+                : candidateBasicDetails.aiCandidateRecommendation === 'Consider'
+                ? 'bg-yellow-50 border-yellow-500'
+                : 'bg-red-50 border-red-500'
+            }`}>
+              <div className="flex items-center justify-between">
+                <span className={`text-lg font-bold ${
+                  candidateBasicDetails.aiCandidateRecommendation === 'Strong Hire'
+                    ? 'text-green-700'
+                    : candidateBasicDetails.aiCandidateRecommendation === 'Consider'
+                    ? 'text-yellow-700'
+                    : 'text-red-700'
+                }`}>
+                  {candidateBasicDetails.aiCandidateRecommendation.toUpperCase()}
+                </span>
+                <div className="text-right">
+                  <p className="text-2xl font-bold text-gray-900">{candidateBasicDetails.candidateOverallScore}%</p>
+                  <p className="text-xs text-gray-600">Overall Score</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="border-t border-gray-200 pt-6">
+            <h4 className="text-sm font-semibold text-secondary uppercase tracking-wide mb-4">Analysis Date</h4>
+            <p className="text-sm text-gray-700">
+              Screened on {new Date(candidateBasicDetails.aiScreenedOn).toLocaleDateString('en-US', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+              })}
+            </p>
+          </div>
+        </div>
+      </RightDrawer>
 
     </div>
   );

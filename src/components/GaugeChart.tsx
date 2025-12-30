@@ -11,7 +11,7 @@ export default function GaugeChart({ value, max, label }: GaugeChartProps) {
   const getColor = (percent: number) => {
     if (percent < 33) return '#ef4444';
     if (percent < 66) return '#eab308';
-    return '#22c55e';
+    return '#EE3961';
   };
 
   return (

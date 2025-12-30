@@ -20,13 +20,13 @@ export default function CandidatesList() {
   };
 
   const getScoreIcon = (score: number) => {
-    if (score >= 80) return <TrendingUp className="w-5 h-5 text-green-600" />;
+    if (score >= 80) return <TrendingUp className="w-5 h-5 text-primary" />;
     if (score >= 60) return <Minus className="w-5 h-5 text-yellow-600" />;
     return <TrendingDown className="w-5 h-5 text-red-600" />;
   };
 
   const getScoreColor = (score: number) => {
-    if (score >= 80) return 'text-green-600 bg-green-50';
+    if (score >= 80) return 'text-primary bg-primary/10';
     if (score >= 60) return 'text-yellow-600 bg-yellow-50';
     return 'text-red-600 bg-red-50';
   };
@@ -49,7 +49,7 @@ export default function CandidatesList() {
             <div className="flex items-center gap-8">
               <h1 className="text-xl font-bold text-gray-900">AI Resume Screener</h1>
               <nav className="flex items-center gap-6">
-                <button className="text-sm font-medium text-blue-600 border-b-2 border-blue-600 pb-1">Dashboard</button>
+                <button className="text-sm font-medium text-primary border-b-2 border-primary pb-1">Dashboard</button>
                 <button className="text-sm font-medium text-gray-600 hover:text-gray-900">Interviews</button>
                 <button className="text-sm font-medium text-gray-600 hover:text-gray-900">Subscription</button>
               </nav>
@@ -85,7 +85,7 @@ export default function CandidatesList() {
                   <tr key={candidate.candidateBasicDetails.candidateId} className="hover:bg-gray-50 transition-colors">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center">
+                        <div className="w-10 h-10 bg-gradient-to-br from-primary/80 to-primary rounded-full flex items-center justify-center">
                           <span className="text-white font-semibold text-sm">
                             {candidate.candidateBasicDetails.candidateName.split(' ').map(n => n[0]).join('')}
                           </span>
@@ -123,7 +123,7 @@ export default function CandidatesList() {
                     <td className="px-6 py-4">
                       <button
                         onClick={() => handleViewSummary(candidate)}
-                        className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors"
+                        className="flex items-center gap-2 px-4 py-2 bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary/90 transition-colors"
                       >
                         <FileText className="w-4 h-4" />
                         AI Summary
