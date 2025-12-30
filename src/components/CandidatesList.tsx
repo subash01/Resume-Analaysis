@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { FileText, TrendingUp, TrendingDown, Minus } from 'lucide-react';
 import { dummyCandidates } from '../lib/dummyData';
-import Modal from './Modal';
+import RightDrawer from './RightDrawer';
 import AnalysisResults from './AnalysisResults';
 import type { AnalysisOutput } from '../types/analysis.types';
 
@@ -137,14 +137,14 @@ export default function CandidatesList() {
         </div>
       </div>
 
-      <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+      <RightDrawer isOpen={isModalOpen} onClose={handleCloseModal}>
         {selectedCandidate && (
           <AnalysisResults
             analysis={selectedCandidate}
             onNewAnalysis={handleCloseModal}
           />
         )}
-      </Modal>
+      </RightDrawer>
     </div>
   );
 }
